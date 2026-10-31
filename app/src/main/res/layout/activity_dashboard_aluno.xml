@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvSaudacaoAluno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Olá, estudante!"
+            android:textColor="@color/azul"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Acompanhe seus atendimentos acadêmicos."
+            android:textColor="@color/texto_secundario" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Precisa de ajuda em alguma disciplina?"
+                android:textColor="@color/texto"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="Encontre um professor e solicite um horário de atendimento."
+                android:textColor="@color/texto_secundario" />
+
+            <Button
+                android:id="@+id/btnSolicitarAtendimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="Solicitar atendimento"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/azul" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Próximos atendimentos"
+            android:textColor="@color/texto"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/containerProximosAtendimentos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/tvEstadoProximos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nenhum atendimento próximo."
+                android:textColor="@color/texto_secundario" />
+        </LinearLayout>
+
+        <Button android:id="@+id/btnMinhasSolicitacoes" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="Minhas solicitações" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+        <Button android:id="@+id/btnMeuHistorico" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Meu histórico" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+    </LinearLayout>
+</ScrollView>

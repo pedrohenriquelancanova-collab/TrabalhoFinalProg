@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detalhes do atendimento"
+            android:textColor="@color/azul"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView android:id="@+id/tvDetalheProfessor" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Professor: —" android:textColor="@color/texto" android:textSize="16sp" />
+            <TextView android:id="@+id/tvDetalheDisciplina" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Disciplina: —" android:textColor="@color/texto" />
+            <TextView android:id="@+id/tvDetalheData" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Data: —" android:textColor="@color/texto" />
+            <TextView android:id="@+id/tvDetalheHorario" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Horário: —" android:textColor="@color/texto" />
+            <TextView android:id="@+id/tvDetalheModalidade" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Modalidade: —" android:textColor="@color/texto" />
+            <TextView android:id="@+id/tvDetalheStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Situação: —" android:textColor="@color/azul" android:textStyle="bold" />
+            <TextView android:id="@+id/tvDetalheDescricao" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:text="Descrição do atendimento" android:textColor="@color/texto_secundario" />
+        </LinearLayout>
+
+        <Button android:id="@+id/btnAlterarAtendimento" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="Solicitar alteração" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+        <Button android:id="@+id/btnCancelarAtendimento" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Solicitar cancelamento" android:textAllCaps="false" />
+        <Button android:id="@+id/btnRegistrarResultado" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Registrar resultado (professor)" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo"
+    android:orientation="vertical"
+    android:padding="18dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Minhas disciplinas"
+        android:textColor="@color/azul"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etNomeDisciplina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:hint="Nome da disciplina"
+        android:padding="13dp"
+        android:background="@drawable/bg_input" />
+
+    <Button
+        android:id="@+id/btnSalvarDisciplina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Adicionar disciplina"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/azul" />
+
+    <ListView
+        android:id="@+id/lvDisciplinas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:divider="@color/borda"
+        android:dividerHeight="1dp" />
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="14dp">
+    <TextView android:id="@+id/tvItemTituloAtendimento" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Atendimento de Matemática" android:textColor="@color/texto" android:textSize="16sp" android:textStyle="bold" />
+    <TextView android:id="@+id/tvItemDataAtendimento" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="10/11/2026 às 14:00" android:textColor="@color/texto_secundario" />
+    <TextView android:id="@+id/tvItemStatusAtendimento" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Pendente" android:textColor="@color/azul" />
+</LinearLayout>

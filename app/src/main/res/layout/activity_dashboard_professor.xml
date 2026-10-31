@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvSaudacaoProfessor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Olá, professor!"
+            android:textColor="@color/azul"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Resumo dos seus atendimentos"
+            android:textColor="@color/texto_secundario" />
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:columnCount="2"
+            android:rowCount="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="105dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_card"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView android:id="@+id/tvQtdHoje" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/azul" android:textSize="28sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hoje" android:textColor="@color/texto_secundario" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="105dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_card"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView android:id="@+id/tvQtdPendentes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/azul" android:textSize="28sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Solicitações" android:textColor="@color/texto_secundario" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="105dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_card"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView android:id="@+id/tvQtdRealizados" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/azul" android:textSize="28sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Realizados" android:textColor="@color/texto_secundario" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="105dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="@drawable/bg_card"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView android:id="@+id/tvQtdCancelados" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="@color/azul" android:textSize="28sp" android:textStyle="bold" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cancelados" android:textColor="@color/texto_secundario" />
+            </LinearLayout>
+        </GridLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Acesso rápido"
+            android:textColor="@color/texto"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button android:id="@+id/btnMenuAlunos" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="Gerenciar alunos" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+        <Button android:id="@+id/btnMenuSolicitacoes" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ver solicitações" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+        <Button android:id="@+id/btnMenuDisponibilidade" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Minha disponibilidade" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+        <Button android:id="@+id/btnMenuAtendimentos" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Agenda de atendimentos" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+    </LinearLayout>
+</ScrollView>
