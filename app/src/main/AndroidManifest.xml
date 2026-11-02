@@ -24,6 +24,66 @@
             android:name=".CadastroActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".TelaProfessor"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".TelaAluno"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ListaAlunos"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".DetalheAtendimento"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Disciplinas"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Disbonibilidade"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Aluno"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MeusAtendimentos"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".RegistroAtendimento"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Solicitacoes"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".SolicitacaoAtendimento"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ItemAluno"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ItemAtendimento"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ItemDisbonibilidade"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ItemSolicitacao"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

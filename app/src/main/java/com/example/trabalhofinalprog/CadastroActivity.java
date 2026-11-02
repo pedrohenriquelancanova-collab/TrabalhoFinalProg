@@ -78,7 +78,7 @@ public class CadastroActivity extends AppCompatActivity {
 
 
         if (textoSelecionado.equals("Aluno") && TextUtils.isEmpty(matr) && validaMatricula(matr)) {
-            Toast.makeText(getApplicationContext(), "Preencha a matricula corretament!!!",
+            Toast.makeText(getApplicationContext(), "Preencha a matricula corretamente!!!",
                     Toast.LENGTH_SHORT).show();
             return;
         }

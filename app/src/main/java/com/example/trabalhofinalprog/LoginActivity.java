@@ -54,5 +54,15 @@ public class LoginActivity extends AppCompatActivity {
             if(TextUtils.isEmpty(email) || TextUtils.isEmpty(senha)){
                 Toast.makeText(getApplicationContext(), "Preencha todos os campos!!!", Toast.LENGTH_SHORT).show();
             }
+
+            if(email.equals("admin") && senha.equals("admin")){
+                Intent intent = new Intent(LoginActivity.this, TelaProfessor.class);
+                startActivity(intent);
+            }
+
+        if(email.equals("aluno") && senha.equals("aluno")){
+            Intent intent = new Intent(LoginActivity.this, TelaAluno.class);
+            startActivity(intent);
+        }
     }
 }
