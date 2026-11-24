@@ -15,15 +15,6 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etPesquisarAluno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:hint="Pesquisar por nome ou matrícula"
-        android:inputType="text"
-        android:padding="12dp"
-        android:background="@drawable/bg_input" />
 
     <Button
         android:id="@+id/btnNovoAluno"

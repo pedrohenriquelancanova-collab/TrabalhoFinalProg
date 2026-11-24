@@ -12,9 +12,37 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.trabalhofinalprog.controller.AtendimentoController;
+import com.example.trabalhofinalprog.controller.SolicitacaoController;
+import com.example.trabalhofinalprog.model.Usuario;
+import com.example.trabalhofinalprog.util.Sessao;
+
 public class TelaProfessor extends AppCompatActivity {
     TextView texto;
-    Button btGerenciar, btSolicitacoes, btDisponibilidade, btAgenda;
+    TextView tvQuantPendente;
+    TextView tvQuantRealizados;
+    TextView tvQuantCancelados;
+    TextView tvQuantHoje;
+    Button btGerenciar, btSolicitacoes, btDisponibilidade, btAgenda, btAdicionarDisciplina;
+
+    private AtendimentoController atendimentoController;
+    private SolicitacaoController solicitacaoController;
+    private Usuario usuario;
+
+
+
+
+    // Atualiza os contadores toda vez que a tela volta ao primeiro plano.
+    @Override
+    protected void onResume() {
+        super.onResume();
+        long id = Sessao.getUsuarioId(this);
+        tvQuantHoje.setText(String.valueOf(atendimentoController.contarHoje(id)));
+        // "Solicitações" = pedidos de alunos ainda pendentes de resposta
+        tvQuantPendente.setText(String.valueOf(solicitacaoController.contarPendentes(id)));
+        tvQuantRealizados.setText(String.valueOf(atendimentoController.contarPorStatus(id, "REALIZADO")));
+        tvQuantCancelados.setText(String.valueOf(atendimentoController.contarPorStatus(id, "CANCELADO")));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +54,32 @@ public class TelaProfessor extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         texto = findViewById(R.id.tvSaudacaoProfessor);
         btGerenciar = findViewById(R.id.btnMenuAlunos);
         btDisponibilidade = findViewById(R.id.btnMenuDisponibilidade);
         btSolicitacoes = findViewById(R.id.btnMenuSolicitacoes);
         btAgenda = findViewById(R.id.btnMenuAtendimentos);
+        btAdicionarDisciplina = findViewById(R.id.btnAdicionarDisciplinas);
+        tvQuantCancelados = findViewById(R.id.tvQtdCancelados);
+        tvQuantHoje = findViewById(R.id.tvQtdHoje);
+        tvQuantPendente = findViewById(R.id.tvQtdPendentes);
+        tvQuantRealizados = findViewById(R.id.tvQtdRealizados);
+        atendimentoController = new AtendimentoController(this);
+        solicitacaoController = new SolicitacaoController(this);
+
+        long id = Sessao.getUsuarioId(this);
+        String nome = Sessao.getNome(this);
+
+        texto.setText(nome);
+
+        btAdicionarDisciplina.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TelaProfessor.this, Disciplinas.class);
+                startActivity(intent);
+            }
+        });
 
         btGerenciar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -15,14 +15,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.trabalhofinalprog.controller.UsuarioController;
+import com.example.trabalhofinalprog.model.Usuario;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CadastroActivity extends AppCompatActivity {
+
+
     private EditText nome, email, matricula, senha, confirmaSenha;
     private RadioButton opAluno, opProfessor;
     private Button cadastroUsuario;
     private RadioGroup rg;
+    private UsuarioController usuarioController;
 
     private String nomePreenchido, emailPreenchido, senhaPreenchido, confimaSenhaPreenchido, matr;
 
@@ -36,6 +42,7 @@ public class CadastroActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        usuarioController = new UsuarioController(this);
         nome = findViewById(R.id.etNome);
         email = findViewById(R.id.etEmailCadastro);
         matricula = findViewById(R.id.etMatricula);
@@ -67,17 +74,16 @@ public class CadastroActivity extends AppCompatActivity {
         confimaSenhaPreenchido = confirmaSenha.getText().toString();
         matr = matricula.getText().toString().trim();
 
-        int idSelecionado = rg.getCheckedRadioButtonId();
-        RadioButton radioButtonSelecionado = findViewById(idSelecionado);
-        String textoSelecionado = radioButtonSelecionado.getText().toString();
-
         if (!verificaPreencimento()) {
             Toast.makeText(getApplicationContext(), "Preencha todos os campos!!!", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        RadioButton radioButtonSelecionado = findViewById(rg.getCheckedRadioButtonId());
+        String textoSelecionado = radioButtonSelecionado.getText().toString();
 
-        if (textoSelecionado.equals("Aluno") && TextUtils.isEmpty(matr) && validaMatricula(matr)) {
+
+        if (textoSelecionado.equals("Aluno") && (TextUtils.isEmpty(matr) || !validaMatricula(matr))) {
             Toast.makeText(getApplicationContext(), "Preencha a matricula corretamente!!!",
                     Toast.LENGTH_SHORT).show();
             return;
@@ -97,7 +103,21 @@ public class CadastroActivity extends AppCompatActivity {
         }
 
 
-        Toast.makeText(getApplicationContext(), "Usuário cadastrado!!!", Toast.LENGTH_SHORT).show();
+        boolean aluno = textoSelecionado.equals("Aluno");
+        long resultado = usuarioController.cadastrar(nomePreenchido, emailPreenchido,
+                aluno ? matr : null, senhaPreenchido,
+                aluno ? Usuario.ALUNO : Usuario.PROFESSOR);
+
+        if (resultado == UsuarioController.EMAIL_DUPLICADO) {
+            Toast.makeText(getApplicationContext(), "Este e-mail já está cadastrado!!!", Toast.LENGTH_SHORT).show();
+        } else if (resultado == UsuarioController.MATRICULA_DUPLICADA) {
+            Toast.makeText(getApplicationContext(), "Esta matrícula já está cadastrada!!!", Toast.LENGTH_SHORT).show();
+        } else if (resultado < 0) {
+            Toast.makeText(getApplicationContext(), "Erro ao cadastrar usuário!!!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Usuário cadastrado!!!", Toast.LENGTH_SHORT).show();
+            finish(); // volta para o login
+        }
     }
 
     private boolean verificaPreencimento() {

@@ -12,11 +12,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.trabalhofinalprog.controller.AtendimentoController;
+import com.example.trabalhofinalprog.util.Sessao;
+
 public class TelaAluno extends AppCompatActivity {
 
     TextView nome, atendimentos;
 
     Button solicitar, historico, minhasSolictacoes;
+
+    private AtendimentoController atendimentoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,12 @@ public class TelaAluno extends AppCompatActivity {
         solicitar = findViewById(R.id.btnSolicitarAtendimento);
         historico = findViewById(R.id.btnMeuHistorico);
         minhasSolictacoes = findViewById(R.id.btnMinhasSolicitacoes);
+        atendimentoController = new AtendimentoController(this);
+
+        long id = Sessao.getUsuarioId(this);
+        String Nome = Sessao.getNome(this);
+
+        nome.setText(Nome);
 
         solicitar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,9 +14,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.trabalhofinalprog.controller.UsuarioController;
+import com.example.trabalhofinalprog.model.Usuario;
+import com.example.trabalhofinalprog.util.Sessao;
+
 public class LoginActivity extends AppCompatActivity {
     private Button btLogin, btCadastro;
     private EditText textoEmail, textoSenha;
+    private UsuarioController usuarioController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        usuarioController = new UsuarioController(this);
         btLogin = findViewById(R.id.btnEntrar);
         btCadastro = findViewById(R.id.btCadastro);
         textoEmail = findViewById(R.id.etEmail);
@@ -49,20 +55,22 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     private void realizarLogin(){
-            String email = textoEmail.getText().toString();
-            String senha = textoSenha.getText().toString();
-            if(TextUtils.isEmpty(email) || TextUtils.isEmpty(senha)){
-                Toast.makeText(getApplicationContext(), "Preencha todos os campos!!!", Toast.LENGTH_SHORT).show();
-            }
-
-            if(email.equals("admin") && senha.equals("admin")){
-                Intent intent = new Intent(LoginActivity.this, TelaProfessor.class);
-                startActivity(intent);
-            }
-
-        if(email.equals("aluno") && senha.equals("aluno")){
-            Intent intent = new Intent(LoginActivity.this, TelaAluno.class);
-            startActivity(intent);
+        String email = textoEmail.getText().toString().trim();
+        String senha = textoSenha.getText().toString();
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(senha)) {
+            Toast.makeText(getApplicationContext(), "Preencha todos os campos!!!", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        Usuario usuario = usuarioController.autenticar(email, senha);
+        if (usuario == null) {
+            Toast.makeText(getApplicationContext(), "E-mail ou senha inválidos!!!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Sessao.iniciar(this, usuario);
+        Class<?> destino = usuario.isProfessor() ? TelaProfessor.class : TelaAluno.class;
+        startActivity(new Intent(LoginActivity.this, destino));
+        finish();
     }
 }

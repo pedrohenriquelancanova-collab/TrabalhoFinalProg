@@ -96,5 +96,6 @@
         <Button android:id="@+id/btnMenuSolicitacoes" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Ver solicitações" android:textAllCaps="false" android:backgroundTint="@color/azul" />
         <Button android:id="@+id/btnMenuDisponibilidade" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Minha disponibilidade" android:textAllCaps="false" android:backgroundTint="@color/azul" />
         <Button android:id="@+id/btnMenuAtendimentos" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Agenda de atendimentos" android:textAllCaps="false" android:backgroundTint="@color/azul" />
+        <Button android:id="@+id/btnAdicionarDisciplinas" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Disciplinas" android:textAllCaps="false" android:backgroundTint="@color/azul" />
     </LinearLayout>
 </ScrollView>

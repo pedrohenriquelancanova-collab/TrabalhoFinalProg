@@ -8,4 +8,20 @@
     <TextView android:id="@+id/tvItemSolicitante" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Aluno: Nome" android:textColor="@color/texto" android:textSize="16sp" android:textStyle="bold" />
     <TextView android:id="@+id/tvItemResumoSolicitacao" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Disciplina e data desejada" android:textColor="@color/texto_secundario" />
     <TextView android:id="@+id/tvItemStatusSolicitacao" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Pendente" android:textColor="@color/azul" />
+    <Button
+        android:id="@+id/btAprovarSolicitacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="APROVAR"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/azul" />
+
+    <Button
+        android:id="@+id/btRecusarSolicitacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="RECUSAR"
+        android:textAllCaps="false"/>
 </LinearLayout>
