@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/** Atendimentos agendados, pedidos de alteração/cancelamento e registro de resultado com presença. */
 public class AtendimentoController {
 
     private static final String SELECT =
@@ -37,18 +36,15 @@ public class AtendimentoController {
         return l.isEmpty() ? null : l.get(0);
     }
 
-    /** Agenda do professor (statusFiltro nulo = todos), em ordem de data. */
     public List<Atendimento> listarPorProfessor(long idProfessor, String statusFiltro) {
         return listar("t.id_professor = ?", idProfessor, statusFiltro);
     }
 
-    /** Atendimentos em que o aluno participa (statusFiltro nulo = todos). */
     public List<Atendimento> listarPorAluno(long idAluno, String statusFiltro) {
         return listar("t.id_atendimento IN (SELECT id_atendimento FROM presenca WHERE id_aluno = ?)",
                 idAluno, statusFiltro);
     }
 
-    /** Próximos atendimentos AGENDADOS do aluno (de hoje em diante). */
     public List<Atendimento> proximosDoAluno(long idAluno, int limite) {
         return consultar(SELECT +
                         "WHERE t.status = 'AGENDADO' AND t.data >= ? " +
@@ -57,23 +53,19 @@ public class AtendimentoController {
                 new String[]{hoje(), String.valueOf(idAluno)});
     }
 
-    /** Aluno pede alteração: o atendimento fica sinalizado para o professor decidir. */
     public boolean solicitarAlteracao(long idAtendimento) {
         return mudarStatus(idAtendimento, Atendimento.ALTERACAO_SOLICITADA, Atendimento.AGENDADO);
     }
 
-    /** Aluno pede cancelamento: o atendimento fica sinalizado para o professor confirmar. */
     public boolean solicitarCancelamento(long idAtendimento) {
         return mudarStatus(idAtendimento, Atendimento.CANCELAMENTO_SOLICITADO, Atendimento.AGENDADO);
     }
 
-    /** Professor cancela de fato um atendimento ainda não realizado. */
     public boolean cancelar(long idAtendimento) {
         return mudarStatus(idAtendimento, Atendimento.CANCELADO,
                 Atendimento.AGENDADO, Atendimento.ALTERACAO_SOLICITADA, Atendimento.CANCELAMENTO_SOLICITADO);
     }
 
-    /** Professor reagenda (também volta o status para AGENDADO). */
     public boolean reagendar(long idAtendimento, String novaData, String novaHoraInicio, String novaHoraFim) {
         if (!DisponibilidadeController.horarioValido(novaHoraInicio)) return false;
         ContentValues v = new ContentValues();
@@ -86,7 +78,6 @@ public class AtendimentoController {
                 new String[]{String.valueOf(idAtendimento)}) > 0;
     }
 
-    /** Adiciona outro aluno ao atendimento (ex.: atendimento em grupo). */
     public boolean adicionarAluno(long idAtendimento, long idAluno) {
         ContentValues v = new ContentValues();
         v.put("id_atendimento", idAtendimento);
@@ -112,10 +103,7 @@ public class AtendimentoController {
         return lista;
     }
 
-    /**
-     * Registra o resultado (tela "Registrar atendimento"): situação (REALIZADO, FALTA ou CANCELADO),
-     * conteúdo tratado, observações e a presença de cada aluno. Tudo na mesma transação.
-     */
+
     public boolean registrarResultado(long idAtendimento, String situacao, String conteudo,
                                       String observacoes, List<Presenca> presencas) {
         SQLiteDatabase db = banco.getWritableDatabase();
@@ -146,7 +134,6 @@ public class AtendimentoController {
         }
     }
 
-    // ------------------------------------------------- números do dashboard do professor
 
     public int contarHoje(long idProfessor) {
         return contar("SELECT COUNT(*) FROM atendimento WHERE id_professor = ? AND data = ? AND status <> 'CANCELADO'",
@@ -158,7 +145,6 @@ public class AtendimentoController {
                 String.valueOf(idProfessor), status);
     }
 
-    // ---------------------------------------------------------------- helpers
 
     private int contar(String sql, String... args) {
         try (Cursor c = banco.getReadableDatabase().rawQuery(sql, args)) {

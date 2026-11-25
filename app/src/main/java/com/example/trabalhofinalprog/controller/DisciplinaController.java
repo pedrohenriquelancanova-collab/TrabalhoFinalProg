@@ -10,7 +10,6 @@ import com.example.trabalhofinalprog.model.Disciplina;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Disciplinas que cada professor atende. */
 public class DisciplinaController {
 
     private final ConectaDB banco;
@@ -19,7 +18,6 @@ public class DisciplinaController {
         this.banco = ConectaDB.getInstance(contexto);
     }
 
-    /** Retorna o id da disciplina, ou -1 se o nome for vazio/já existir para esse professor. */
     public long inserir(Disciplina d) {
         if (d.getNome() == null || d.getNome().trim().isEmpty()) return -1;
         ContentValues v = new ContentValues();

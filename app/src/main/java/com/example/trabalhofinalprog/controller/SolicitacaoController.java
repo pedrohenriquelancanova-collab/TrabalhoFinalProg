@@ -15,10 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/** Solicitações de atendimento: o aluno cria, o professor aprova ou recusa. */
 public class SolicitacaoController {
 
-    /** Códigos negativos retornados por aprovar(). Valores > 0 são o id do atendimento criado. */
     public static final long JA_TRATADA = -1;
     public static final long HORARIO_OCUPADO = -2;
 
@@ -37,7 +35,6 @@ public class SolicitacaoController {
         this.banco = ConectaDB.getInstance(contexto);
     }
 
-    /** Cria a solicitação com status PENDENTE. Retorna o id ou -1 em caso de erro. */
     public long criar(Solicitacao s) {
         ContentValues v = new ContentValues();
         v.put("id_aluno", s.getIdAluno());
@@ -59,7 +56,6 @@ public class SolicitacaoController {
         return l.isEmpty() ? null : l.get(0);
     }
 
-    /** statusFiltro nulo = todas. Mais recentes primeiro. */
     public List<Solicitacao> listarPorAluno(long idAluno, String statusFiltro) {
         return listar("s.id_aluno = ?", idAluno, statusFiltro);
     }
@@ -82,12 +78,7 @@ public class SolicitacaoController {
         }
     }
 
-    /**
-     * Aprova a solicitação e, na mesma transação, cria o atendimento AGENDADO com a presença do aluno.
-     * Retorna o id do atendimento criado, JA_TRATADA se a solicitação não existe / já foi tratada,
-     * ou HORARIO_OCUPADO se o professor já tem atendimento nesse horário.
-     * As demais solicitações pendentes em conflito com esta são canceladas automaticamente.
-     */
+
     public long aprovar(long idSolicitacao) {
         SQLiteDatabase db = banco.getWritableDatabase();
         db.beginTransaction();
@@ -95,10 +86,8 @@ public class SolicitacaoController {
             Solicitacao s = buscarPorId(idSolicitacao);
             if (s == null || !Solicitacao.PENDENTE.equals(s.getStatus())) return JA_TRATADA;
 
-            // Fim do intervalo (se não houver hora_fim, usa o início).
             String fim = s.getHoraFim() != null ? s.getHoraFim() : s.getHoraInicio();
 
-            // Já existe atendimento do professor nesse horário (aprovado antes)? Não duplica.
             try (Cursor c = db.rawQuery(
                     "SELECT 1 FROM atendimento WHERE id_professor = ? AND data = ? AND status <> 'CANCELADO' " +
                             "AND hora_inicio < ? AND COALESCE(hora_fim, hora_inicio) > ?",
@@ -129,8 +118,7 @@ public class SolicitacaoController {
             p.put("presente", 0);
             db.insertOrThrow("presenca", null, p);
 
-            // Cancela automaticamente as outras solicitações PENDENTES do mesmo professor
-            // cujo horário se sobrepõe ao que acabou de ser aprovado.
+
             ContentValues cancelada = new ContentValues();
             cancelada.put("status", Solicitacao.CANCELADA);
             db.update("solicitacao", cancelada,
@@ -148,12 +136,10 @@ public class SolicitacaoController {
         }
     }
 
-    /** Professor recusa uma solicitação pendente. */
     public boolean recusar(long idSolicitacao) {
         return mudarStatusSePendente(idSolicitacao, Solicitacao.RECUSADA);
     }
 
-    /** Aluno cancela uma solicitação ainda pendente. */
     public boolean cancelar(long idSolicitacao) {
         return mudarStatusSePendente(idSolicitacao, Solicitacao.CANCELADA);
     }

@@ -1,6 +1,10 @@
 package com.example.trabalhofinalprog;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -23,6 +27,7 @@ import com.example.trabalhofinalprog.controller.AtendimentoController;
 public class MeusAtendimentos extends AppCompatActivity {
 
     private AtendimentoController atendimentoController;
+    private Atendimento atendimento;
     private Spinner filtro;
     private ListView listar;
     private ArrayAdapter<Atendimento> adapterListar;
@@ -38,11 +43,26 @@ public class MeusAtendimentos extends AppCompatActivity {
         });
 
         atendimentoController = new AtendimentoController(this);
+
         filtro = findViewById(R.id.spFiltroAtendimentos);
         listar = findViewById(R.id.lvAtendimentos);
 
         adapterListar = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<Atendimento>());
         listar.setAdapter(adapterListar);
+
+        listar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Atendimento atendimentoSelecionado = adapterListar.getItem(position);
+
+                Intent intent = new Intent(MeusAtendimentos.this, DetalheAtendimento.class);
+
+                intent.putExtra("idAtendimento", atendimentoSelecionado.getId());
+
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

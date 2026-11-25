@@ -60,7 +60,6 @@ public class Solicitacoes extends AppCompatActivity {
         });
     }
 
-    // Recarrega ao voltar para a tela (ex.: depois de aprovar/recusar).
     @Override
     protected void onResume() {
         super.onResume();

@@ -12,10 +12,8 @@ import com.example.trabalhofinalprog.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-/** CRUD e autenticação de usuários (alunos e professores). */
 public class UsuarioController {
 
-    /** Códigos negativos retornados por cadastrar(). Valores > 0 são o id do novo usuário. */
     public static final long ERRO = -1;
     public static final long EMAIL_DUPLICADO = -2;
     public static final long MATRICULA_DUPLICADA = -3;
@@ -28,7 +26,6 @@ public class UsuarioController {
         this.banco = ConectaDB.getInstance(contexto);
     }
 
-    /** Cadastra um usuário. A senha é gravada com hash. Retorna o id ou um dos códigos negativos. */
     public long cadastrar(String nome, String email, String matricula, String senha, String tipo) {
         email = email.trim().toLowerCase();
         matricula = vazioParaNulo(matricula);
@@ -48,12 +45,10 @@ public class UsuarioController {
         }
     }
 
-    /** Cadastro de aluno feito pelo professor: a senha inicial é a própria matrícula. */
     public long cadastrarAluno(String nome, String matricula, String email) {
         return cadastrar(nome, email, matricula, matricula, Usuario.ALUNO);
     }
 
-    /** Retorna o usuário se e-mail/senha conferem; senão null. */
     public Usuario autenticar(String email, String senha) {
         SQLiteDatabase db = banco.getReadableDatabase();
         try (Cursor c = db.rawQuery("SELECT " + COLUNAS + ", senha FROM usuario WHERE email = ?",
@@ -72,7 +67,6 @@ public class UsuarioController {
         }
     }
 
-    /** Lista alunos ordenados por nome. filtro (opcional) busca em nome ou matrícula. */
     public List<Usuario> listarAlunos(String filtro) {
         String sql = "SELECT " + COLUNAS + " FROM usuario WHERE tipo = 'ALUNO'";
         String[] args = null;
@@ -96,7 +90,6 @@ public class UsuarioController {
         return consultar("SELECT " + COLUNAS + " FROM usuario WHERE tipo = 'PROFESSOR' ORDER BY nome COLLATE NOCASE", null);
     }
 
-    /** Atualiza nome, e-mail e matrícula. Retorna false se o e-mail/matrícula já pertencem a outro usuário. */
     public boolean atualizar(Usuario u) {
         String email = u.getEmail().trim().toLowerCase();
         String matricula = vazioParaNulo(u.getMatricula());
@@ -122,7 +115,6 @@ public class UsuarioController {
                 new String[]{String.valueOf(id)}) > 0;
     }
 
-    /** Exclui o usuário e (por cascata) suas disciplinas, solicitações e presenças. */
     public boolean excluir(long id) {
         return banco.getWritableDatabase().delete("usuario", "id_usuario = ?",
                 new String[]{String.valueOf(id)}) > 0;

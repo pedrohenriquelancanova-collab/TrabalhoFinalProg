@@ -10,7 +10,6 @@ import com.example.trabalhofinalprog.model.Disponibilidade;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Horários em que cada professor atende. */
 public class DisponibilidadeController {
 
     public static final long ERRO = -1;
@@ -23,15 +22,13 @@ public class DisponibilidadeController {
         this.banco = ConectaDB.getInstance(contexto);
     }
 
-    /** Retorna o id gravado ou um dos códigos negativos acima. */
     public long inserir(Disponibilidade d) {
         if (!horarioValido(d.getHoraInicio()) || !horarioValido(d.getHoraFim())
                 || d.getHoraInicio().compareTo(d.getHoraFim()) >= 0
                 || d.getDiaSemana() < 1 || d.getDiaSemana() > 7) {
             return HORARIO_INVALIDO;
         }
-        // Dois intervalos se sobrepõem quando inicio < fim_existente E fim > inicio_existente.
-        // (HH:mm com zero à esquerda compara corretamente como texto.)
+
         try (Cursor c = banco.getReadableDatabase().rawQuery(
                 "SELECT 1 FROM disponibilidade WHERE id_professor = ? AND dia_semana = ? " +
                         "AND hora_inicio < ? AND hora_fim > ?",
@@ -56,7 +53,6 @@ public class DisponibilidadeController {
         return consultar("WHERE id_professor = ?", new String[]{String.valueOf(idProfessor)});
     }
 
-    /** Horários do professor em um dia da semana (Calendar.DAY_OF_WEEK) — usado no spinner "Horário disponível". */
     public List<Disponibilidade> listarPorProfessorEDia(long idProfessor, int diaSemana) {
         return consultar("WHERE id_professor = ? AND dia_semana = ?",
                 new String[]{String.valueOf(idProfessor), String.valueOf(diaSemana)});
@@ -80,7 +76,6 @@ public class DisponibilidadeController {
         return lista;
     }
 
-    /** Aceita somente HH:mm (00:00 a 23:59). */
     public static boolean horarioValido(String h) {
         return h != null && h.matches("([01][0-9]|2[0-3]):[0-5][0-9]");
     }

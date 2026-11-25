@@ -13,13 +13,13 @@ public class Atendimento {
     public static final String FALTA = "FALTA";
 
     private long id;
-    private long idSolicitacao; // 0 = sem solicitação de origem
+    private long idSolicitacao;
     private long idProfessor;
-    private long idDisciplina;  // 0 = sem disciplina
+    private long idDisciplina;
     private String tipoAtendimento;
-    private String data;        // yyyy-MM-dd
-    private String horaInicio;  // HH:mm
-    private String horaFim;     // HH:mm
+    private String data;
+    private String horaInicio;
+    private String horaFim;
     private String modalidade;
     private String descricao;
     private String status = AGENDADO;
@@ -35,6 +35,7 @@ public class Atendimento {
 
     public long getIdSolicitacao() { return idSolicitacao; }
     public void setIdSolicitacao(long idSolicitacao) { this.idSolicitacao = idSolicitacao; }
+
 
     public long getIdProfessor() { return idProfessor; }
     public void setIdProfessor(long idProfessor) { this.idProfessor = idProfessor; }
